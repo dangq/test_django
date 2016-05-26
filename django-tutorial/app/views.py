@@ -22,7 +22,9 @@ def profile(request):
         username = request.POST.get('user')
         req = requests.get('https://api.github.com/users/' + username)
         jsonList = []
+
         jsonList.append(req.json())
+        #print jsonList
         userData = {}
         for data in jsonList:
             userData['name'] = data['name']
@@ -36,7 +38,7 @@ def profile(request):
         parsedData.append(userData)
     return render(request, 'app/profile.html', {'data': parsedData})
 def model(request):
-    parsedData=[]
+    #parsedData=[]
 
     if request.method=='POST':
         # Create Model
@@ -52,11 +54,30 @@ def model(request):
         test_data = "data/test/sample_test_2.csv"
         file_save= "data/result_prediction.csv"
         predict = CandidateMovementPrediction(model,test_data,file_save)
-        data = predict.calProbMovementPrediction()
-        #print data
-        parsedData=Convert_csv_json(data,'pretty')
-            print data
-    return render(request, 'app/profile.html', {'data': parsedData})
+        data,data_csv = predict.calProbMovementPrediction()
+        #print data_csv
+        parsedData=Convert_csv_json(data_csv,'pretty')
+        Data_prediction=json.loads(parsedData)
+        #print Data_prediction
+
+
+        Data=[]
+
+        for data in Data_prediction:
+            userData={}
+            userData['candidate_id'] = data['candidate_id']
+            userData['Employer'] = data['Employer']
+            userData['Moving'] = data['Moving']
+            userData['Predicted'] = data['Predicted']
+            Data.append(userData)
+            # userData['public_repos'] = data['public_repos']
+        #     # userData['avatar_url'] = data['avatar_url']
+        #     # userData['followers'] = data['followers']
+        #     # userData['following'] = data['following']
+        print Data
+            #Data.append(userData)
+        #print Data
+    return render(request, 'app/profile.html', {'data': Data})
 
 def Convert_csv_json(_file_name,format):
         csv_rows=[]
