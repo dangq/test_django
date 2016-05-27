@@ -9,5 +9,5 @@ urlpatterns = [
 	url(r'^test/$', views.test, name='test'),
 	url(r'^profile/$', views.profile, name='profile'),
 	url(r'^model/$', views.model, name='model'),
-	url(r'^list/$', 'list', name='list'),
+	url(r'^list$', views.list, name='list'),
 ]

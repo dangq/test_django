@@ -16,7 +16,6 @@
           margin: 0 auto;
         }    
       </style>
-            <!-- List of uploaded documents -->
     <!-- Upload form. Note enctype attribute! -->
         <form action="/app/list" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -29,7 +28,7 @@
                 {{ form.docfile }}
             </p>
 
-            <!--<p><input type="submit" value="Upload"/></p>-->
+            <p><input type="submit" value="Upload"/></p>
         </form>
 
       <div class="container text-center">
@@ -39,7 +38,7 @@
             <!--<br>
             <input type="text" name="user" class="form-control" placeholder="Github User Name, e.g: DrkSephy" value="" required autofocus>
             <br>-->
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Upload and Show Prediction Data</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Show Prediction Data</button>
           </form>
       </div>
       <div class="table-responsive">

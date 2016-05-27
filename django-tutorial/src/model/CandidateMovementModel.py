@@ -12,7 +12,10 @@ import src.const.TemplateData as templData
 class CandidateMovementModel(object):
     def __init__(self, _file_training_data):
         try:
+            #print _file_training_data
             self.training_data = pd.read_csv(_file_training_data, sep=',')
+            #print self.training_data
+            #self.training_data=_file_training_data
         except IOError:
             print "Error:\t File doesnot exist "
         except AttributeError:
