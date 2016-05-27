@@ -1,15 +1,20 @@
 # views.py 
-
+from django.shortcuts import render_to_response
 from django.shortcuts import render, HttpResponse
 import requests
 from src.model.CandidateMovementModel import CandidateMovementModel
 from src.predict.CandidateMovementPrediction import CandidateMovementPrediction
+from django.template import RequestContext
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from models import Document
+from forms import DocumentForm
 import src.const.TemplateData as templData
 import csv
 import json
 
 # Create your views here.
-
+global Data
 def index(request):
     return HttpResponse('Hello World!')
 
@@ -38,8 +43,9 @@ def profile(request):
         parsedData.append(userData)
     return render(request, 'app/profile.html', {'data': parsedData})
 def model(request):
-    #parsedData=[]
-
+    Data_pre=[]
+    documents=[]
+    form=[]
     if request.method=='POST':
         # Create Model
         loc_training_data = 'data/trainingdata/dataset_07_Apr.csv'
@@ -61,7 +67,7 @@ def model(request):
         #print Data_prediction
 
 
-        Data=[]
+
 
         for data in Data_prediction:
             userData={}
@@ -69,15 +75,10 @@ def model(request):
             userData['Employer'] = data['Employer']
             userData['Moving'] = data['Moving']
             userData['Predicted'] = data['Predicted']
-            Data.append(userData)
-            # userData['public_repos'] = data['public_repos']
-        #     # userData['avatar_url'] = data['avatar_url']
-        #     # userData['followers'] = data['followers']
-        #     # userData['following'] = data['following']
-        print Data
-            #Data.append(userData)
-        #print Data
-    return render(request, 'app/profile.html', {'data': Data})
+            Data_pre.append(userData)
+        documents,form=list(request)
+
+    return render(request, 'app/profile.html', {'data':Data_pre,'documents': documents, 'form': form})
 
 def Convert_csv_json(_file_name,format):
         csv_rows=[]
@@ -94,6 +95,29 @@ def Convert_csv_json(_file_name,format):
             file_json=json.dumps(csv_rows)
         return file_json
 
+def list(request):
+    # Handle file upload
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = Document(docfile=request.FILES['docfile'])
+            newdoc.save()
+
+            # Redirect to the document list after POST
+            return HttpResponseRedirect(reverse('django-tutorial.app.views.list'))
+    else:
+        form = DocumentForm()  # A empty, unbound form
+
+    # Load documents for the list page
+    documents = Document.objects.all()
+
+    # Render list page with the documents and the form
+    return documents,form
+    # return render_to_response(
+    #     'list.html',
+    #     {'documents': documents, 'form': form},
+    #     context_instance=RequestContext(request)
+    # )
 
 
 
