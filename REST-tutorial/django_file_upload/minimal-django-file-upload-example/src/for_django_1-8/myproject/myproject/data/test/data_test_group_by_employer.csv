@@ -1,0 +1,8 @@
+candidate_id,candidate_name,candidate_surname,candidate_email,c_employment_employer_name,c_employment_job_start,c_employment_job_end,candidate_degree,candidate_gender,name,c_details_current_job_years,c_details_total_experience
+2176110,Michael,McCarthy,mazunguu@gmail.com,Epson Electronics America,2013-08-01,2016-05-11,Bachelors,Male,White/Caucasian,15Plus,
+2176110,Michael,McCarthy,mazunguu@gmail.com,Epson Electronics America,1999-06-01,2013-07-01,Bachelors,Male,White/Caucasian,15Plus,
+2176110,Michael,McCarthy,mazunguu@gmail.com,Test,1997-06-01,May 1999,Bachelors,Male,White/Caucasian,15Plus,
+2176110,Michael,McCarthy,mazunguu@gmail.com,IBM,1995-06-01,1996,Bachelors,Male,White/Caucasian,15Plus,
+2176109,A,B,test@gmail.com,ABC,2014-05-01,Present,A,A,A,A,A
+2176109,A,B,test@gmail.com,Yahoo,2013,2014-04-01,Bachelors,Male,White/Caucasian,A,A
+2176109,A,B,test@gmail.com,Yahoo,2012,2013,Bachelors,Male,White/Caucasian,A,A

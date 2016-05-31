@@ -1,34 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="/static/jquery/dist/jquery.js"></script>
-        <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
-        <title>Minimal Django File Upload Example</title>
-    </head>
-
-    <body>
-    <style>
+<head>
+    <script src="/static/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+<h1 class="text-center"> Prediction Model Data </h1>
+	<div class="col-lg-12">
+      <style>
         .form-signin {
           max-width: 550px;
           padding: 15px;
           margin: 0 auto;
         }
       </style>
-        <!-- List of uploaded documents -->
-        {% if documents %}
-            <ul>
-                {% for document in documents %}
-                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No documents.</p>
-        {% endif %}
-
-        <!-- Upload form. Note enctype attribute! -->
-        <form action="{% url "list" %}" method="post" enctype="multipart/form-data">
+            <!-- List of uploaded documents -->
+    <!-- Upload form. Note enctype attribute! -->
+        <form action="/app/list" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
 
@@ -38,21 +28,20 @@
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
             </p>
-           <div class="container text-center">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Upload and Show Prediction Data</button>
-               </div>
-            <!--<p><input type="submit" value="Upload"/></p>-->
+
+            <p><input type="submit" value="Upload"/></p>
         </form>
-    <!--<div class="container text-center">
-          <form class="form-signin" id="login_form" method="post" action="{% url "list" %}">
+
+      <div class="container text-center">
+          <form class="form-signin" id="login_form" method="post" action="/app/list">
             {% csrf_token %}
 
             <!--<br>
             <input type="text" name="user" class="form-control" placeholder="Github User Name, e.g: DrkSephy" value="" required autofocus>
-            <br>
+            <br>-->
             <button class="btn btn-lg btn-primary btn-block" type="submit">Upload and Show Prediction Data</button>
           </form>
-      </div>-->
+      </div>
       <div class="table-responsive">
           <table class="table table-bordered table-hover table-striped tablesorter">
               <thead>
@@ -83,6 +72,6 @@
           </tbody>
           </table>
       </div>
-    </body>
-
+    </div>
+</body>
 </html>
