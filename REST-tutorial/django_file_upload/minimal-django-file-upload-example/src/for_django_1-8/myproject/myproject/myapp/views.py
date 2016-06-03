@@ -11,15 +11,25 @@ from forms import DocumentForm
 import csv
 import json
 
+
+from ..src.const.TemplateData import cols_dep_var_header
 from ..src.model.CandidateMovementModel import CandidateMovementModel
 from ..src.predict.CandidateMovementPrediction import CandidateMovementPrediction
 from ..src.const import TemplateData as templData
+import pandas as pd
+import csv
 
-
-
+# class View():
+#     def __init__(self,Data,form,documents,request,test_data):
+#         self.form=form
+#         self.Data=Data
+#         self.documents=documents
+#         self.request=request
+#         self.test_data=test_data
 def list(request):
     # Handle file upload
     Data=[]
+    temp_Data=[]
     if request.method == 'POST':
         #docId = request.POST.get('id', None)
         #print docId
@@ -27,24 +37,45 @@ def list(request):
 
         if form.is_valid():
             newdoc = Document(docfile=request.FILES['docfile'])
-            #print newdoc.
-            newdoc.save()
+            file_save= request.FILES['docfile'].read()
+            files=file_save.replace('\n',',')
+            files_list= files.split(',')
+            header=[]
+            for i in range(0,len(cols_dep_var_header)):
+                header.append(files_list[i])
+            if set(header)==set(cols_dep_var_header):
+                if ' ' not in files_list:
+                    newdoc.save()
+                    return HttpResponseRedirect(reverse('myproject.myapp.views.list'))
+            else:
+                form=DocumentForm()
+                documents=Document.objects.all()
+                return render(request,'list.html',{'form':form,'documents':documents})
+
+
+            # for h in cols_dep_var_header:
+            #     if h in header:
+            # #print cols_dep_var_header
+            # for line in files._fieldnames:
+            #     print line
+            #     break
+
+            # if request.handelfailupload(newdoc):
+            #     #print newdoc.
+            # else:
+            #newdoc.save()
             #Check if file is the same
              #toDo
-            # documents = Document.objects.all()
-            # file_len=len(documents)
-            # file_path=documents[file_len-1].docfile.path
-            # Data=modeltest(file_path)
 
             # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('myproject.myapp.views.list'))
-            #return HttpResponse('Success')
+
     else:
         docId = Document.objects.all()
         # delete file is not exist
 
 
         for id in docId:
+
             if not os.path.isfile(id.docfile.path):
                 id.delete()
 
@@ -58,7 +89,7 @@ def list(request):
     if len(documents)!=0:
         file_path=documents[len(documents)-1].docfile.path
         Data=modeltest(file_path)
-        #print Data
+
 
     return render_to_response(
         'list.html',
@@ -69,6 +100,7 @@ def list(request):
 
 def modeltest(test_data):
     Data_pre=[]
+
     loc_training_data = 'data/trainingdata/dataset_07_Apr.csv'
         #print loc_training_data
     can = CandidateMovementModel(loc_training_data)
@@ -112,3 +144,7 @@ def Convert_csv_json(_file_name,format):
         else:
             file_json=json.dumps(csv_rows)
         return file_json
+
+def handelfailupload(file):
+    #todo
+    return 1

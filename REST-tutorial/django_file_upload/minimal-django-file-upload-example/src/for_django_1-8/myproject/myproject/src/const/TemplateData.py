@@ -27,3 +27,4 @@ db_col_candidate_id = "candidate_id"
 # list of dependent columns for prediction model
 cols_dep_var = [temp_col_type, temp_col_company_credit, temp_col_current_job_years, temp_col_avg_time, temp_col_seniority]
 cols_dep_var_predicted = [temp_col_type, temp_col_company_credit, temp_col_current_job_years, temp_col_avg_time, temp_col_seniority,temp_col_Predicted]
+cols_dep_var_header=[temp_col_candidate_id,temp_col_employer,temp_col_type,temp_col_company_credit,temp_col_current_job_years,temp_col_avg_time,temp_col_seniority,temp_col_Moving]

@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'myproject.myapp',
     'django_cleanup'
+
 )
 
 MIDDLEWARE_CLASSES = (
