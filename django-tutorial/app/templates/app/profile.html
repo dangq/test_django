@@ -29,11 +29,11 @@
                 {{ form.docfile }}
             </p>
 
-            <!--<p><input type="submit" value="Upload"/></p>-->
+            <p><input type="submit" value="Upload"/></p>
         </form>
 
       <div class="container text-center">
-          <form class="form-signin" id="login_form" method="post" action="/app/model/">
+          <form class="form-signin" id="login_form" method="post" action="/app/list">
             {% csrf_token %}
 
             <!--<br>
