@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../SkillDictionary/.idea/SkillDictionary.iml" filepath="$PROJECT_DIR$/../../../SkillDictionary/.idea/SkillDictionary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../cleanupTrainingData/.idea/cleanupTrainingData.iml" filepath="$PROJECT_DIR$/../../cleanupTrainingData/.idea/cleanupTrainingData.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/datascienceWS.iml" filepath="$PROJECT_DIR$/.idea/datascienceWS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../django_An/test_django/REST-tutorial/django_file_upload/minimal-django-file-upload-example/src/for_django_1-8/myproject/.idea/myproject.iml" filepath="$PROJECT_DIR$/../../../django_An/test_django/REST-tutorial/django_file_upload/minimal-django-file-upload-example/src/for_django_1-8/myproject/.idea/myproject.iml" />
+    </modules>
+  </component>
+</project>
